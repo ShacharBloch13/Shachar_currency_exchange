@@ -16,16 +16,17 @@ def check_currency():
     try:
         base = 'https://v6.exchangerate-api.com'
         api_key = os.getenv('EXCHANGE_RATE_API_KEY')
-        threshold = request.args.get('threshold', type=float)
+        sum = request.args.get('sum', default=1, type=float)
         baseCurrency = request.args.get('baseCurrency', default='USD', type=str)
         api_url = f'{base}/v6/{api_key}/latest/{baseCurrency}'
 
         response = requests.get(api_url)
 
         if response.status_code == 200:
-            conversion_rates = response.json().get("conversion_rates")
-            result = {currency: rate for currency, rate in conversion_rates.items() if rate > threshold}
-            return jsonify(result)
+            data = response.json()
+            conversion_rates = data.get("conversion_rates")
+            converted_values = {currency: rate * sum for currency, rate in conversion_rates.items()}
+            return jsonify(converted_values)
 
         else:
             # Log error details for debugging
