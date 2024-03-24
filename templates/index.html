@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter</title>
+</head>
+<body>
+    <h1>Currency Converter</h1>
+    <input type="number" id="sum" placeholder="Amount" />
+    <input type="text" id="baseCurrency" placeholder="Base Currency (e.g., USD)" />
+    <button onclick="convertCurrency()">Convert</button>
+    <div id="result"></div>
+
+    <script>
+        function convertCurrency() {
+            const sum = document.getElementById('sum').value;
+            const baseCurrency = document.getElementById('baseCurrency').value;
+
+            fetch(`/currency/check?sum=${sum}&baseCurrency=${baseCurrency}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
