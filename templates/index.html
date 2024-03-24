@@ -15,7 +15,7 @@
             const sum = document.getElementById('sum').value;
             const baseCurrency = document.getElementById('baseCurrency').value;
 
-            fetch(`/currency/check?sum=${sum}&baseCurrency=${baseCurrency}`)
+            fetch(`http://127.0.0.1:5000/currency/check?sum=${sum}&baseCurrency=${baseCurrency}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);

@@ -1,7 +1,7 @@
 # app/routes/currency.py
 
-from flask import Blueprint, request, jsonify
-from flask import jsonify
+from flask import Blueprint, request, jsonify, Flask
+from flask_cors import CORS
 from dotenv import load_dotenv
 import requests
 import os
@@ -10,6 +10,9 @@ import logging
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
 bp = Blueprint('currency', __name__, url_prefix='/currency')
+
+app = Flask(__name__)
+CORS(app)
 
 @bp.route('/check', methods=['GET'])
 def check_currency():
