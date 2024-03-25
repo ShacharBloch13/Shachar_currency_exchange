@@ -1,0 +1,60 @@
+/* Spotify-like CSS */
+body {
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    color: #1DB954;
+}
+
+input[type="number"], input[type="text"] {
+    background-color: #333;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    color: #fff;
+    border-radius: 20px;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+button {
+    background-color: #1DB954;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1ed760;
+}
+
+#result {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #282828;
+}
+
+th {
+    background-color: #282828;
+}
+
+tr:hover {
+    background-color: #333;
+}

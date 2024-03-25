@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>Currency Converter</title>
+    
+       <link rel="stylesheet" href="style.css">
+    
+
+    
 </head>
 <body>
     <h1>Currency Converter</h1>
@@ -16,11 +21,11 @@
             const baseCurrency = document.getElementById('baseCurrency').value;
 
             fetch(`http://127.0.0.1:5000/currency/check?sum=${sum}&baseCurrency=${baseCurrency}`)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('result').innerHTML = JSON.stringify(data, null, 2);
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('result').innerHTML = html;
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error(error));
         }
     </script>
 </body>

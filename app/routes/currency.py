@@ -29,7 +29,17 @@ def check_currency():
             data = response.json()
             conversion_rates = data.get("conversion_rates")
             converted_values = {currency: rate * sum for currency, rate in conversion_rates.items()}
+            sorted_converted_values = dict(sorted(converted_values.items(), key=lambda item: item[1], reverse=True))
+            
+            # if we just want for api platform (like postman)
             return jsonify(converted_values)
+
+            #if we want to arrange in a table for HTML
+            # table = "<table><tr><th>Currency</th><th>Value</th></tr>"
+            # for currency, value in sorted_converted_values.items():
+            #     table += f"<tr><td>{currency}</td><td>{value}</td></tr>"
+            # table += "</table>"
+            # return table
 
         else:
             # Log error details for debugging
