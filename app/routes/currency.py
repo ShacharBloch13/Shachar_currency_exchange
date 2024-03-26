@@ -6,12 +6,15 @@ from dotenv import load_dotenv
 import requests
 import os
 import logging
+import math
+
 
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
 bp = Blueprint('currency', __name__, url_prefix='/currency')
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 CORS(app)
 
 @bp.route('/check', methods=['GET'])
@@ -28,7 +31,7 @@ def check_currency():
         if response.status_code == 200:
             data = response.json()
             conversion_rates = data.get("conversion_rates")
-            converted_values = {currency: rate * sum for currency, rate in conversion_rates.items()}
+            converted_values = {currency: math.ceil(rate * sum * 100) / 100 for currency, rate in conversion_rates.items()}
             sorted_converted_values = dict(sorted(converted_values.items(), key=lambda item: item[1], reverse=True))
             
             # if we just want for api platform (like postman)
